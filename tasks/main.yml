@@ -33,7 +33,7 @@
         name: '{{ item }}'
         owner: logstash
         group: logstash
-        mode: 0755
+        mode: '755'
         state: directory
       loop:
         - '{{ logstash_data_directory }}'
@@ -45,7 +45,7 @@
   template:
     src: '{{ item }}'
     dest: /etc/logstash/logstash.yml
-    mode: 0644
+    mode: '644'
   become: yes
   notify: reload logstash
   tags: [logstash, config]
@@ -57,7 +57,7 @@
   template:
     src: '{{ item.config_file }}'
     dest: /etc/logstash/conf.d/{{ item.name }}.conf
-    mode: 0644
+    mode: '644'
   become: yes
   loop: '{{ logstash_agents }}'
   notify: reload logstash
